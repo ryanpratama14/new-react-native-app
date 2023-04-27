@@ -30,7 +30,7 @@ const Navigation = (props) => {
       <TouchableOpacity
         activeOpacity={0.7}
         onPress={() => {
-          props.navigation.navigate("Main", props.params);
+          props.navigation.navigate("Main");
         }}
         style={props.active == "main" ? navstyle.buttonActive : navstyle.button}
       >
@@ -38,7 +38,6 @@ const Navigation = (props) => {
           xml={props.active == "main" ? homeActive : home}
           style={navstyle.icon}
         />
-
         <Text
           style={props.active == "main" ? navstyle.textActive : navstyle.text}
         >
@@ -48,7 +47,7 @@ const Navigation = (props) => {
       <TouchableOpacity
         activeOpacity={0.7}
         onPress={() => {
-          props.navigation.navigate("Expense", props.params);
+          props.navigation.navigate("Expense");
         }}
         style={
           props.active == "expense" ? navstyle.buttonActive : navstyle.button
@@ -69,7 +68,7 @@ const Navigation = (props) => {
       <TouchableOpacity
         activeOpacity={0.7}
         onPress={() => {
-          props.navigation.navigate("Todo", props.params);
+          props.navigation.navigate("Todo");
         }}
         style={props.active == "todo" ? navstyle.buttonActive : navstyle.button}
       >
@@ -86,7 +85,7 @@ const Navigation = (props) => {
       <TouchableOpacity
         activeOpacity={0.7}
         onPress={() => {
-          props.navigation.navigate("Shop", props.params);
+          props.navigation.navigate("Shop");
         }}
         style={props.active == "shop" ? navstyle.buttonActive : navstyle.button}
       >
