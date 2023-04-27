@@ -18,6 +18,8 @@ import {
   ScrollView,
   TouchableWithoutFeedback,
 } from "react-native-gesture-handler";
+import Navigation from "../Components/Navigation";
+import { expensestyles } from "../Styles/ExpenseStyles";
 
 const initialValues = [
   {
@@ -28,7 +30,8 @@ const initialValues = [
   },
 ];
 
-export default function Todo() {
+export default function TodoScreen({ navigation, route }) {
+  const params = route.params;
   const [dataTodo, onChangeData] = React.useState(initialValues);
   const [title, onChangeTitle] = React.useState("");
   const [date, onChangeDate] = React.useState(new Date());
@@ -63,7 +66,9 @@ export default function Todo() {
             }}
           >
             <Text style={styles.heading}>{data?.title}</Text>
-            <Text style={{ color: "darkblue" }}>{dateFormat(data?.date)}</Text>
+            <Text style={{ color: "darkblue", fontFamily: "Trebuchet MS" }}>
+              {dateFormat(data?.date)}
+            </Text>
           </View>
           <View
             style={{
@@ -86,7 +91,7 @@ export default function Todo() {
             </TouchableOpacity>
             {!data?.isDone && (
               <TouchableOpacity
-                activeOpacity={0.9}
+                activeOpacity={0.7}
                 onPress={() => markTodo(index)}
                 style={{ width: "100%", alignItems: "center" }}
               >
@@ -102,131 +107,108 @@ export default function Todo() {
   };
 
   return (
-    <SafeAreaView style={styles.todoContainer}>
-      <StatusBar style="auto" />
-      <View
-        style={{
-          padding: 6,
-          display: "flex",
-          gap: 6,
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+    <View style={{ flex: 1 }}>
+      <SafeAreaView style={styles.todoContainer}>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+          <View style={expensestyles.introduction}>
+            <Text style={expensestyles.introductionText}>
+              Welcome To Todo List App!
+            </Text>
+          </View>
+        </TouchableWithoutFeedback>
         <View
           style={{
+            backgroundColor: "#e2e8f0",
             flex: "auto",
             display: "flex",
-            flexDirection: "row",
+            flexDirection: "column",
+            gap: 16,
+            paddingVertical: 20,
+            width: "100%",
             alignItems: "center",
             justifyContent: "center",
-            gap: 10,
           }}
         >
-          <Image
-            source={require("../../assets/faoTech.png")}
-            style={{ width: 20, aspectRatio: "4/4" }}
+          <TextInput
+            style={styles.input}
+            placeholder="Mastering React Native"
+            value={title}
+            onChangeText={onChangeTitle}
           />
-          <Text style={{ fontSize: 24, fontWeight: 600 }}>
-            Welcome to: Todo App
-          </Text>
+          <DateTimePicker
+            display="default"
+            mode="date"
+            themeVariant="light"
+            value={date}
+            onChange={onChange}
+          />
+          <Pressable
+            onPress={() => {
+              if (title) {
+                onChangeData([
+                  ...dataTodo,
+                  {
+                    title,
+                    id: Math.trunc(Math.random() * (100 - 2) + 2),
+                    isDone: false,
+                    date: convertDate(date),
+                  },
+                ]);
+                onChangeTitle("");
+                Keyboard.dismiss();
+              }
+            }}
+          >
+            <View style={styles.btn}>
+              <Text style={styles.btnText}>Input Data</Text>
+            </View>
+          </Pressable>
         </View>
-        <Text style={{ fontSize: 16, fontWeight: 600, textAlign: "center" }}>
-          faoTech
-        </Text>
-      </View>
-
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: "#e2e8f0",
-          flex: "auto",
-          display: "flex",
-          flexDirection: "column",
-          gap: 16,
-          paddingVertical: 20,
-          width: "100%",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <TextInput
-          style={styles.input}
-          placeholder="Mastering React Native"
-          value={title}
-          onChangeText={onChangeTitle}
-        />
-        <DateTimePicker
-          display="default"
-          mode="date"
-          themeVariant="light"
-          value={date}
-          onChange={onChange}
-        />
-        <Pressable
-          onPress={() => {
-            if (title) {
-              onChangeData([
-                ...dataTodo,
-                {
-                  title,
-                  id: Math.trunc(Math.random() * (100 - 2) + 2),
-                  isDone: false,
-                  date: convertDate(date),
-                },
-              ]);
-              onChangeTitle("");
-              Keyboard.dismiss();
-            }
-          }}
-        >
-          <View style={styles.btn}>
-            <Text style={styles.btnText}>Input Data</Text>
-          </View>
-        </Pressable>
-      </View>
-      <View style={styles.childContainer}>
-        <Text
-          style={{
-            fontSize: 40,
-            fontWeight: 600,
-            color: "blue",
-            textAlign: "center",
-          }}
-        >
-          Todo List
-        </Text>
-        <FlatList
-          style={styles.flatList}
-          data={dataTodo.reverse()}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item, index }) => {
-            return !item?.isDone && <ToDo data={item} index={index} />;
-          }}
-        />
-      </View>
-      <View style={styles.childContainer2}>
-        <Text
-          style={{
-            fontSize: 40,
-            fontWeight: 600,
-            color: "green",
-            textAlign: "center",
-          }}
-        >
-          Done
-        </Text>
-        <FlatList
-          style={styles.flatList}
-          data={dataTodo}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item, index }) => {
-            return item?.isDone && <ToDo data={item} index={index} />;
-          }}
-        />
-      </View>
-    </SafeAreaView>
+        <View style={styles.childContainer}>
+          <Text
+            style={{
+              fontSize: 40,
+              fontWeight: 600,
+              color: "blue",
+              textAlign: "center",
+              fontFamily: "Trebuchet MS",
+            }}
+          >
+            Todo List
+          </Text>
+          <FlatList
+            style={styles.flatList}
+            data={dataTodo.reverse()}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item, index }) => {
+              return !item?.isDone && <ToDo data={item} index={index} />;
+            }}
+          />
+        </View>
+        <View style={styles.childContainer2}>
+          <Text
+            style={{
+              fontSize: 40,
+              fontWeight: 600,
+              color: "green",
+              textAlign: "center",
+              fontFamily: "Trebuchet MS",
+            }}
+          >
+            Done
+          </Text>
+          <FlatList
+            style={styles.flatList}
+            data={dataTodo}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item, index }) => {
+              return item?.isDone && <ToDo data={item} index={index} />;
+            }}
+          />
+        </View>
+      </SafeAreaView>
+      <Navigation navigation={navigation} params={params} active="todo" />
+    </View>
   );
 }
 
@@ -235,6 +217,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 700,
     width: "60%",
+    fontFamily: "Trebuchet MS",
   },
   todoComp: {
     padding: 15,
@@ -267,7 +250,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   childContainer: {
-    flex: 3,
+    flex: 1,
     flexDirection: "column",
     gap: 12,
     backgroundColor: "#ffff",
@@ -275,9 +258,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 40,
   },
   childContainer2: {
-    flex: 3,
+    flex: 1,
     flexDirection: "column",
-    gap: 36,
+    gap: 12,
     backgroundColor: "#fffc",
     paddingTop: 30,
     paddingHorizontal: 40,
@@ -285,6 +268,7 @@ const styles = StyleSheet.create({
   input: {
     width: "50%",
     height: 40,
+    fontFamily: "Trebuchet MS",
     backgroundColor: "#fff",
     borderRadius: 6,
     color: "#3E3E3E",
@@ -300,6 +284,7 @@ const styles = StyleSheet.create({
   btnText: {
     fontSize: 20,
     color: "#3E3E3E",
+    fontFamily: "Trebuchet MS",
     fontWeight: 600,
   },
   btnDel: {
@@ -311,6 +296,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "#fff",
     fontWeight: 600,
+    fontFamily: "Trebuchet MS",
   },
   btnDone: {
     padding: 8,
@@ -320,6 +306,7 @@ const styles = StyleSheet.create({
   btnTextDone: {
     fontSize: 20,
     color: "#fff",
+    fontFamily: "Trebuchet MS",
     fontWeight: 600,
   },
 });
