@@ -6,6 +6,7 @@ import ExpenseScreen from "./src/Screens/ExpenseScreen";
 import TodoScreen from "./src/Screens/TodoScreen";
 import AuthScreen from "./src/Screens/AuthScreen";
 import ShopScreen from "./src/Screens/ShopScreen";
+import ShopItemScreen from "./src/Screens/ShopItemScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -46,13 +47,8 @@ const App = () => {
             animationEnabled: false,
           }}
         />
-        <Stack.Screen
-          name="Shop"
-          component={ShopScreen}
-          options={{
-            animationEnabled: false,
-          }}
-        />
+        <Stack.Screen name="Shop" component={ShopScreen} />
+        <Stack.Screen name="ShopItem" component={ShopItemScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

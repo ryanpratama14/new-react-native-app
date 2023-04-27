@@ -64,7 +64,7 @@ export default function AuthScreen({ navigation }) {
             Welcome!
           </Text>
           <TextInput
-            value={email}
+            value={email.toLowerCase()}
             placeholder="example@example.com"
             onChangeText={setEmail}
             style={authstyles.input}
