@@ -22,7 +22,8 @@ const App = () => {
           name="Auth"
           component={AuthScreen}
           options={{
-            animation: "none",
+            animation: "fade",
+            animationDuration: 150,
             gestureEnabled: false,
           }}
         />
@@ -30,7 +31,8 @@ const App = () => {
           name="Main"
           component={MainScreen}
           options={{
-            animation: "none",
+            animation: "fade",
+            animationDuration: 150,
             gestureEnabled: false,
           }}
         />
@@ -38,7 +40,8 @@ const App = () => {
           name="Expense"
           component={ExpenseScreen}
           options={{
-            animation: "none",
+            animation: "fade",
+            animationDuration: 150,
             gestureEnabled: false,
           }}
         />
@@ -46,7 +49,8 @@ const App = () => {
           name="Todo"
           component={TodoScreen}
           options={{
-            animation: "none",
+            animation: "fade",
+            animationDuration: 150,
             gestureEnabled: false,
           }}
         />
@@ -54,7 +58,8 @@ const App = () => {
           name="Shop"
           component={ShopScreen}
           options={{
-            animation: "none",
+            animation: "fade",
+            animationDuration: 150,
             gestureEnabled: false,
           }}
         />

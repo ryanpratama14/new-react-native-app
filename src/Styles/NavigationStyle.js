@@ -3,8 +3,6 @@ import { StyleSheet } from "react-native";
 export const navstyle = StyleSheet.create({
   container: {
     marginTop: "auto",
-    paddingBottom: 30,
-    paddingTop: 10,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
@@ -15,11 +13,15 @@ export const navstyle = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: 70,
+    paddingBottom: 30,
+    paddingTop: 10,
   },
   button: {
     alignItems: "center",
     justifyContent: "center",
     width: 70,
+    paddingBottom: 30,
+    paddingTop: 10,
   },
   text: {
     fontSize: 18,
