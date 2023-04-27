@@ -21,7 +21,9 @@ const MainScreen = ({ navigation, route }) => {
     }
   };
 
-  getData();
+  React.useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <View style={{ flex: 1 }}>

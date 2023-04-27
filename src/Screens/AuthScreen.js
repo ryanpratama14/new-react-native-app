@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Alert,
   Keyboard,
@@ -33,13 +33,15 @@ export default function AuthScreen({ navigation }) {
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem("@token");
-      if (value !== null) {
+      if (value) {
         navigation.navigate("Main");
       }
     } catch (e) {}
   };
 
-  getData();
+  React.useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <View

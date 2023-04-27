@@ -16,38 +16,48 @@ const App = () => {
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
-          animation: "none",
         }}
       >
         <Stack.Screen
           name="Auth"
           component={AuthScreen}
           options={{
-            animationEnabled: false,
+            animation: "none",
+            gestureEnabled: false,
           }}
         />
         <Stack.Screen
           name="Main"
           component={MainScreen}
           options={{
-            animationEnabled: false,
+            animation: "none",
+            gestureEnabled: false,
           }}
         />
         <Stack.Screen
           name="Expense"
           component={ExpenseScreen}
           options={{
-            animationEnabled: false,
+            animation: "none",
+            gestureEnabled: false,
           }}
         />
         <Stack.Screen
           name="Todo"
           component={TodoScreen}
           options={{
-            animationEnabled: false,
+            animation: "none",
+            gestureEnabled: false,
           }}
         />
-        <Stack.Screen name="Shop" component={ShopScreen} />
+        <Stack.Screen
+          name="Shop"
+          component={ShopScreen}
+          options={{
+            animation: "none",
+            gestureEnabled: false,
+          }}
+        />
         <Stack.Screen name="ShopItem" component={ShopItemScreen} />
       </Stack.Navigator>
     </NavigationContainer>
