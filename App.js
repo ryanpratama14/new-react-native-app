@@ -5,6 +5,7 @@ import MainScreen from "./src/Screens/MainScreen";
 import ExpenseScreen from "./src/Screens/ExpenseScreen";
 import TodoScreen from "./src/Screens/TodoScreen";
 import AuthScreen from "./src/Screens/AuthScreen";
+import ShopScreen from "./src/Screens/ShopScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -41,6 +42,13 @@ const App = () => {
         <Stack.Screen
           name="Todo"
           component={TodoScreen}
+          options={{
+            animationEnabled: false,
+          }}
+        />
+        <Stack.Screen
+          name="Shop"
+          component={ShopScreen}
           options={{
             animationEnabled: false,
           }}

@@ -4,28 +4,22 @@ export const navstyle = StyleSheet.create({
   container: {
     marginTop: "auto",
     paddingBottom: 30,
-    paddingTop: 0,
+    paddingTop: 10,
     flexDirection: "row",
-    alignItems: "flex-end",
+    alignItems: "center",
     justifyContent: "center",
-    gap: 14,
     backgroundColor: "#d1d5db",
-  },
-  icon: {
-    width: 20,
-    height: 20,
-    marginBottom: 5,
+    gap: 8,
   },
   buttonActive: {
     alignItems: "center",
     justifyContent: "center",
-    width: 74,
-    paddingTop: 8,
+    width: 70,
   },
   button: {
     alignItems: "center",
     justifyContent: "center",
-    width: 74,
+    width: 70,
   },
   text: {
     fontSize: 18,

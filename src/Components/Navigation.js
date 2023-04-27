@@ -8,6 +8,8 @@ import {
   home,
   homeActive,
   logoutActive,
+  shop,
+  shopActive,
   todo,
   todoActive,
 } from "../Icons/Navigation";
@@ -79,6 +81,23 @@ const Navigation = (props) => {
           style={props.active == "todo" ? navstyle.textActive : navstyle.text}
         >
           Todo
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        activeOpacity={0.7}
+        onPress={() => {
+          props.navigation.navigate("Shop", props.params);
+        }}
+        style={props.active == "shop" ? navstyle.buttonActive : navstyle.button}
+      >
+        <SvgXml
+          xml={props.active == "shop" ? shopActive : shop}
+          style={navstyle.icon}
+        />
+        <Text
+          style={props.active == "shop" ? navstyle.textActive : navstyle.text}
+        >
+          Shop
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
