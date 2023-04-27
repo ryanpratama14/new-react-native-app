@@ -17,16 +17,14 @@ export default function AuthScreen({ navigation }) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
-  handleSubmit = () => {
+  const handleSubmit = async () => {
     if (email === "example@example.com" && password === "example") {
-      const storeData = async (value) => {
-        try {
-          await AsyncStorage.setItem("@token", value);
-          console.log(value);
-        } catch (e) {}
-      };
-      storeData(password);
-      navigation.navigate("Main");
+      try {
+        await AsyncStorage.setItem("@token", password);
+        navigation.navigate("Main");
+      } catch (e) {
+        console.log(e);
+      }
     } else {
       Alert.alert("Incorrect email or password");
     }
@@ -38,9 +36,7 @@ export default function AuthScreen({ navigation }) {
       if (value !== null) {
         navigation.navigate("Main");
       }
-    } catch (e) {
-      // error reading value
-    }
+    } catch (e) {}
   };
 
   getData();
